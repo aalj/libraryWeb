@@ -30,7 +30,7 @@ public class Student {
 
 	private int stu_id;
 	private String stu_name;
-	private int stu_number;
+	private String stu_number;
 	private String stu_pwd;
 	private String stu_sex;
 	private int stu_age;
@@ -55,11 +55,11 @@ public class Student {
 		this.stu_name = stu_name;
 	}
 
-	public int getStu_number() {
+	public String getStu_number() {
 		return stu_number;
 	}
 
-	public void setStu_number(int stu_number) {
+	public void setStu_number(String stu_number) {
 		this.stu_number = stu_number;
 	}
 
@@ -79,7 +79,7 @@ public class Student {
 		return stu_sex;
 	}
 
-	public Student(int stu_id, String stu_name, int stu_number, String stu_pwd, String stu_sex, int stu_age,
+	public Student(int stu_id, String stu_name, String stu_number, String stu_pwd, String stu_sex, int stu_age,
 			String stu_college, String stu_subject, String stu_grade, Date stu_create_time) {
 		super();
 		this.stu_id = stu_id;

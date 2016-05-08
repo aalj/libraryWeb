@@ -2,7 +2,7 @@ package com.bestsnail.android;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.net.URLDecoder;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,33 +15,40 @@ import com.bestsnail.bean.BookTable;
 import com.bestsnail.daoiml.SearchBookIml;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 /**
- * 用于发送热门的图书搜索到android端，用于显示热门图书
- * @author liang
- *
+ * Servlet implementation class SearchBookIsbn
  */
-@WebServlet("/SendReMenSousuo")
-public class SendReMenSousuo extends HttpServlet {
+@WebServlet("/SearchBookIsbn")
+public class SearchBookIsbn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    
-    
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		List<BookTable> searchBookList = new SearchBookIml().SearchBookList(98);
-		PrintWriter writer = response.getWriter();
+		System.out.println("lllllll");
+		String isbn = URLDecoder.decode(request.getParameter("isbn"), "utf-8");
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		String json = gson.toJson(searchBookList);
-		writer.print(json);
-		writer.close();
+		PrintWriter writer = response.getWriter();
 		
-		
-		
-		}
+		 BookTable book = new SearchBookIml().DSearchBookByISBN(isbn);
+		 if(book!=null){
+			 String json = gson.toJson(book);
+			 writer.print(json);
+			 
+		 }else{
+			 
+			 writer.print("no");
+		 }
+	}
 
-	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

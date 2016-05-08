@@ -85,6 +85,55 @@ public class SearchBookIml implements SearchBook {
 		return null;
 
 	}
+	//模糊随机查询用于模仿获得热门图书
+	public List<BookTable> SearchBookList(int ii) {
+		PreparedStatement prepare = null;
+		ResultSet query = null;
+		Connection conn = DBconnection.getConnection();
+		/*
+		 * SELECT * FROM book_table AS r1 JOIN (SELECT ROUND(RAND() * (SELECT MAX(book_id) FROM book_table)) AS id) AS r2 WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 5;
+		 */
+		String sql = "SELECT * FROM book_table ORDER BY rand() LIMIT 9  ";
+		try {
+			prepare = conn.prepareStatement(sql);
+			
+			query = prepare.executeQuery();
+			List<BookTable> list = new ArrayList<BookTable>();
+			BookTable bookTable = new BookTable();
+			while (query.next()) {
+				bookTable = new BookTable();
+				
+				bookTable.setBook_id(query.getInt("book_id"));
+				
+				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
+				bookTable.setBook_name(query.getString("book_name"));
+				bookTable.setBook_author(query.getString("book_author"));
+				bookTable.setBook_isbn(query.getString("book_isbn"));
+				bookTable.setBook_category_number(query.getString("book_category_number"));
+				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
+				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
+				bookTable.setBook_price(query.getFloat("book_price"));
+				bookTable.setBook_keywords(query.getString("book_keywords"));
+				bookTable.setBook_image(query.getString("book_image"));
+				bookTable.setBook_cd_down(query.getString("book_cd_down"));
+				bookTable.setBook_introduction(query.getString("book_introduction"));
+				bookTable.setBook_time(query.getDate("book_time"));
+				
+				bookTable.setBook_num(query.getInt("book_num"));
+				list.add(bookTable);
+			}
+			return list;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			CloseDb.close(conn, query, prepare);
+		}
+		
+		return null;
+		
+	}
 
 	@Override
 	public LibraryAddressTable sLibAddressById(int id) {
@@ -117,15 +166,164 @@ public class SearchBookIml implements SearchBook {
 	}
 
 	@Override
+	public List<BookTable> DSearchBookListByAll(String searchName, String guancangflag) {
+		PreparedStatement prepare = null;
+		ResultSet query = null;
+		Connection conn = DBconnection.getConnection();
+		System.out.println(searchName + "---------------");
+		String sql = "select * from book_table where lc_id=? and book_name LIKE ? ;";
+		try {
+			System.out.println("chauxn quanbu ");
+			prepare = conn.prepareStatement(sql);
+			prepare.setString(1, guancangflag);
+			prepare.setString(2, "%" + searchName + "%");
+			query = prepare.executeQuery();
+			List<BookTable> list = new ArrayList<BookTable>();
+			BookTable bookTable = new BookTable();
+			while (query.next()) {
+				bookTable = new BookTable();
+
+				bookTable.setBook_id(query.getInt("book_id"));
+				;
+				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
+				bookTable.setBook_name(query.getString("book_name"));
+				bookTable.setBook_author(query.getString("book_author"));
+				bookTable.setBook_isbn(query.getString("book_isbn"));
+				bookTable.setBook_category_number(query.getString("book_category_number"));
+				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
+				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
+				bookTable.setBook_price(query.getFloat("book_price"));
+				bookTable.setBook_keywords(query.getString("book_keywords"));
+				bookTable.setBook_image(query.getString("book_image"));
+				bookTable.setBook_cd_down(query.getString("book_cd_down"));
+				bookTable.setBook_introduction(query.getString("book_introduction"));
+				bookTable.setBook_time(query.getDate("book_time"));
+
+				bookTable.setBook_num(query.getInt("book_num"));
+				list.add(bookTable);
+			}
+			return list;
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			CloseDb.close(conn, query, prepare);
+		}
+
+		return null;
+
+	}
 	public List<BookTable> DSearchBookListByAll(String searchName) {
 		PreparedStatement prepare = null;
 		ResultSet query = null;
 		Connection conn = DBconnection.getConnection();
-		String sql = "select * from book_table where book_name LIKE '%"+searchName+"%' ";
+		System.out.println(searchName + "---------------");
+		String sql = "select * from book_table where  book_name LIKE ? ;";
 		try {
 			System.out.println("chauxn quanbu ");
 			prepare = conn.prepareStatement(sql);
+			
+			prepare.setString(1, "%" + searchName + "%");
+			query = prepare.executeQuery();
+			List<BookTable> list = new ArrayList<BookTable>();
+			BookTable bookTable = new BookTable();
+			while (query.next()) {
+				bookTable = new BookTable();
+				
+				bookTable.setBook_id(query.getInt("book_id"));
+				;
+				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
+				bookTable.setBook_name(query.getString("book_name"));
+				bookTable.setBook_author(query.getString("book_author"));
+				bookTable.setBook_isbn(query.getString("book_isbn"));
+				bookTable.setBook_category_number(query.getString("book_category_number"));
+				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
+				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
+				bookTable.setBook_price(query.getFloat("book_price"));
+				bookTable.setBook_keywords(query.getString("book_keywords"));
+				bookTable.setBook_image(query.getString("book_image"));
+				bookTable.setBook_cd_down(query.getString("book_cd_down"));
+				bookTable.setBook_introduction(query.getString("book_introduction"));
+				bookTable.setBook_time(query.getDate("book_time"));
+				
+				bookTable.setBook_num(query.getInt("book_num"));
+				list.add(bookTable);
+			}
+			return list;
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			CloseDb.close(conn, query, prepare);
+		}
+		
+		return null;
+		
+	}
 
+	@Override
+	public List<BookTable> DSearchBookListByTiming(String searchName, String guancangflag) {
+
+		PreparedStatement prepare = null;
+		ResultSet query = null;
+		Connection conn = DBconnection.getConnection();
+		String sql = "select * from book_table where lc_id=? "
+				+ "and book_name LIKE ? ";
+		try {
+			prepare = conn.prepareStatement(sql);
+			prepare.setString(1, guancangflag);
+			prepare.setString(2, "%" + searchName + "%");
+			query = prepare.executeQuery();
+			List<BookTable> list = new ArrayList<BookTable>();
+			BookTable bookTable = new BookTable();
+			while (query.next()) {
+				bookTable = new BookTable();
+
+				bookTable.setBook_id(query.getInt("book_id"));
+
+				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
+				bookTable.setBook_name(query.getString("book_name"));
+				bookTable.setBook_author(query.getString("book_author"));
+				bookTable.setBook_isbn(query.getString("book_isbn"));
+				bookTable.setBook_category_number(query.getString("book_category_number"));
+				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
+				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
+				bookTable.setBook_price(query.getFloat("book_price"));
+				bookTable.setBook_keywords(query.getString("book_keywords"));
+				bookTable.setBook_image(query.getString("book_image"));
+				bookTable.setBook_cd_down(query.getString("book_cd_down"));
+				bookTable.setBook_introduction(query.getString("book_introduction"));
+				bookTable.setBook_time(query.getDate("book_time"));
+
+				bookTable.setBook_num(query.getInt("book_num"));
+				list.add(bookTable);
+			}
+			return list;
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			CloseDb.close(conn, query, prepare);
+		}
+
+		return null;
+
+	}
+
+	@Override
+	public List<BookTable> DSearchBookListByzuozhe(String searchName, String guancangflag) {
+
+		PreparedStatement prepare = null;
+		ResultSet query = null;
+		Connection conn = DBconnection.getConnection();
+		String sql = "select * from book_table where lc_id=? and book_author LIKE ? ;";
+		try {
+			prepare = conn.prepareStatement(sql);
+			prepare.setString(1, guancangflag);
+			prepare.setString(2, "%" + searchName + "%");
 			query = prepare.executeQuery();
 			List<BookTable> list = new ArrayList<BookTable>();
 			BookTable bookTable = new BookTable();
@@ -165,111 +363,16 @@ public class SearchBookIml implements SearchBook {
 	}
 
 	@Override
-	public List<BookTable> DSearchBookListByTiming(String searchName) {
+	public List<BookTable> DSearchBookListByzhutici(String searchName, String guancangflag) {
 
 		PreparedStatement prepare = null;
 		ResultSet query = null;
 		Connection conn = DBconnection.getConnection();
-		String sql = "select * from book_table where book_name LIKE '%"+searchName+"%'";
+		String sql = "select * from book_table where lc_id=? and book_name LIKE ? ;";
 		try {
 			prepare = conn.prepareStatement(sql);
-//			prepare.setString(1, searchName);
-			query = prepare.executeQuery();
-			List<BookTable> list = new ArrayList<BookTable>();
-			BookTable bookTable = new BookTable();
-			while (query.next()) {
-				bookTable = new BookTable();
-
-				bookTable.setBook_id(query.getInt("book_id"));
-
-				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
-				bookTable.setBook_name(query.getString("book_name"));
-				bookTable.setBook_author(query.getString("book_author"));
-				bookTable.setBook_isbn(query.getString("book_isbn"));
-				bookTable.setBook_category_number(query.getString("book_category_number"));
-				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
-				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
-				bookTable.setBook_price(query.getFloat("book_price"));
-				bookTable.setBook_keywords(query.getString("book_keywords"));
-				bookTable.setBook_image(query.getString("book_image"));
-				bookTable.setBook_cd_down(query.getString("book_cd_down"));
-				bookTable.setBook_introduction(query.getString("book_introduction"));
-				bookTable.setBook_time(query.getDate("book_time"));
-
-				bookTable.setBook_num(query.getInt("book_num"));
-				list.add(bookTable);
-			}
-			return list;
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-
-		} finally {
-			CloseDb.close(conn, query, prepare);
-		}
-
-		return null;
-
-	}
-
-	@Override
-	public List<BookTable> DSearchBookListByzuozhe(String searchName) {
-
-		PreparedStatement prepare = null;
-		ResultSet query = null;
-		Connection conn = DBconnection.getConnection();
-		String sql = "select * from book_table where  book_author LIKE '%"+searchName+"%';";
-		try {
-			prepare = conn.prepareStatement(sql);
-
-			query = prepare.executeQuery();
-			List<BookTable> list = new ArrayList<BookTable>();
-			BookTable bookTable = new BookTable();
-			while (query.next()) {
-				bookTable = new BookTable();
-
-				bookTable.setBook_id(query.getInt("book_id"));
-				;
-				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
-				bookTable.setBook_name(query.getString("book_name"));
-				bookTable.setBook_author(query.getString("book_author"));
-				bookTable.setBook_isbn(query.getString("book_isbn"));
-				bookTable.setBook_category_number(query.getString("book_category_number"));
-				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
-				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
-				bookTable.setBook_price(query.getFloat("book_price"));
-				bookTable.setBook_keywords(query.getString("book_keywords"));
-				bookTable.setBook_image(query.getString("book_image"));
-				bookTable.setBook_cd_down(query.getString("book_cd_down"));
-				bookTable.setBook_introduction(query.getString("book_introduction"));
-				bookTable.setBook_time(query.getDate("book_time"));
-
-				bookTable.setBook_num(query.getInt("book_num"));
-				list.add(bookTable);
-			}
-			return list;
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-
-		} finally {
-			CloseDb.close(conn, query, prepare);
-		}
-
-		return null;
-
-	}
-
-	@Override
-	public List<BookTable> DSearchBookListByzhutici(String searchName) {
-
-		PreparedStatement prepare = null;
-		ResultSet query = null;
-		Connection conn = DBconnection.getConnection();
-		String sql = "select * from book_table where book_name LIKE '%"+searchName+"%'";
-		try {
-			prepare = conn.prepareStatement(sql);
-
+			prepare.setString(1, guancangflag);
+			prepare.setString(2, "%" + searchName + "%");
 			query = prepare.executeQuery();
 			List<BookTable> list = new ArrayList<BookTable>();
 			BookTable bookTable = new BookTable();
@@ -284,7 +387,9 @@ public class SearchBookIml implements SearchBook {
 				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
 				bookTable.setBook_name(query.getString("book_name"));
 				bookTable.setBook_author(query.getString("book_author"));
-				bookTable.setBook_isbn(query.getString("book_isbn"));
+				String isbn = query.getString("book_isbn");
+				bookTable.setBook_isbn(isbn);
+				bookTable.setBook_borrow_num(DQueryBorrowBokkNum(isbn));
 				bookTable.setBook_category_number(query.getString("book_category_number"));
 				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
 				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
@@ -309,6 +414,87 @@ public class SearchBookIml implements SearchBook {
 
 		return null;
 
+	}
+	 
+	public BookTable DSearchBookByISBN(String isbn) {
+
+		PreparedStatement prepare = null;
+		ResultSet query = null;
+		Connection conn = DBconnection.getConnection();
+		String sql = "select * from book_table where book_isbn=?  ;";
+		try {
+			prepare = conn.prepareStatement(sql);
+			prepare.setString(1, isbn);
+			query = prepare.executeQuery();
+			BookTable bookTable = new BookTable();
+			if (query.next()) {
+				bookTable = new BookTable();
+				// book_id
+
+				//
+
+				bookTable.setBook_id(query.getInt("book_id"));
+				;
+				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
+				bookTable.setBook_name(query.getString("book_name"));
+				bookTable.setBook_author(query.getString("book_author"));
+				
+				bookTable.setBook_isbn(isbn);
+				bookTable.setBook_borrow_num(DQueryBorrowBokkNum(isbn));
+				bookTable.setBook_category_number(query.getString("book_category_number"));
+				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
+				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
+				bookTable.setBook_price(query.getFloat("book_price"));
+				bookTable.setBook_keywords(query.getString("book_keywords"));
+				bookTable.setBook_image(query.getString("book_image"));
+				bookTable.setBook_cd_down(query.getString("book_cd_down"));
+				bookTable.setBook_introduction(query.getString("book_introduction"));
+				bookTable.setBook_time(query.getDate("book_time"));
+
+				bookTable.setBook_num(query.getInt("book_num"));
+				
+			}
+			return bookTable;
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			CloseDb.close(conn, query, prepare);
+		}
+
+		return null;
+
+	}
+	
+	private int DQueryBorrowBokkNum(String isbn){
+		PreparedStatement prepare = null;
+		ResultSet query = null;
+		Connection conn = DBconnection.getConnection();
+		String sql = "select count(*) from book_table where book_isbn=? ;";
+		try {
+			prepare = conn.prepareStatement(sql);
+			prepare.setString(1, isbn);
+			
+			query = prepare.executeQuery();
+			if (query.next()) {
+				return query.getInt("count(*)");
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			CloseDb.close(conn, query, prepare);
+		}
+
+		return 0;
+		
+		
+		
+		
+		
 	}
 
 }

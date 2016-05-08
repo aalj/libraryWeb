@@ -29,14 +29,23 @@ public class BookTable {
 	private Date book_publishing_house_time;
 	private float book_price;
 	private String book_keywords;
-	private String book_image;;
+	private String book_image;
 	private String book_cd_down;
 	private String book_introduction;
 	private Date book_time;
 	private int book_num;
+	private int book_borrow_num;
 
 	public int getBook_id() {
 		return book_id;
+	}
+
+	public int getBook_borrow_num() {
+		return book_borrow_num;
+	}
+
+	public void setBook_borrow_num(int book_borrow_num) {
+		this.book_borrow_num = book_borrow_num;
 	}
 
 	public void setBook_id(int book_id) {

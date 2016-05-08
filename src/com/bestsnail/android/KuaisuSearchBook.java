@@ -21,10 +21,9 @@ import com.google.gson.GsonBuilder;
 /**
  * Servlet implementation class SearchBook
  */
-@WebServlet("/SearchBook")
-public class SearchBook extends HttpServlet {
+@WebServlet("/KuaisuSearchBook")
+public class KuaisuSearchBook extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	SearchBookS bookS = new SearchBookSiml(new SearchBookIml());
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -37,28 +36,15 @@ public class SearchBook extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		System.out.println("kankan neirong ");
 		String guanjianzi = request.getParameter("guanjianzi");
-		String guancangflag = request.getParameter("guancangflag");
-		String flag = request.getParameter("flag");
-		if (flag != null && guanjianzi != null) {
+System.out.println(guanjianzi+"-----------------------");
+		if (guanjianzi != null) {
 			guanjianzi = URLDecoder.decode(guanjianzi, "utf-8");
-			flag = URLDecoder.decode(flag, "utf-8");
-			guancangflag = URLDecoder.decode(guancangflag, "utf-8");
+
 		}
-		System.out.println(guanjianzi + "\t" + flag+"\t"+guancangflag);
 		List<BookTable> list = null;
-		if ("0".equals(flag)) {
-			list = bookS.SearchBookSimlByAll(guanjianzi,guancangflag);
 
-		} else if ("1".equals(flag)) {
-			list = bookS.SearchBookSimlByTiming(guanjianzi,guancangflag);
+		list = new SearchBookIml().DSearchBookListByAll(guanjianzi);
 
-		} else if ("2".equals(flag)) {
-			list = bookS.SearchBookSimlByzuozhe(guanjianzi,guancangflag);
-
-		} else {
-			list = bookS.SearchBookSimlByzhutuci(guanjianzi,guancangflag);
-
-		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String json = gson.toJson(list);
 		System.out.println(json);

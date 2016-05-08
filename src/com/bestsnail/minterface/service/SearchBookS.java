@@ -46,10 +46,10 @@ public interface SearchBookS {
 	 * @since  CodingExample　Ver 1.1
 	 */
 	public List<BookTable> SearchBookSiml(); 
-	public List<BookTable> SearchBookSimlByAll(String searchName);
-	public List<BookTable> SearchBookSimlByTiming(String searchName);
-	public List<BookTable> SearchBookSimlByzuozhe(String searchName);
-	public List<BookTable> SearchBookSimlByzhutuci(String searchName);
-
+	public List<BookTable> SearchBookSimlByAll(String searchName,String guancangflag);
+	public List<BookTable> SearchBookSimlByTiming(String searchName,String guancangflag);
+	public List<BookTable> SearchBookSimlByzuozhe(String searchName,String guancangflag);
+	public List<BookTable> SearchBookSimlByzhutuci(String searchName,String guancangflag);
+	
 }
 

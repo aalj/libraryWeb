@@ -49,12 +49,12 @@ public interface SearchBook {
 
 	public LibraryAddressTable sLibAddressById(int id);
 
-	public List<BookTable> DSearchBookListByAll(String searchName);
+	public List<BookTable> DSearchBookListByAll(String searchName,String guancangflag);
 
-	public List<BookTable> DSearchBookListByTiming(String searchName);
+	public List<BookTable> DSearchBookListByTiming(String searchName,String guancangflag);
 
-	public List<BookTable> DSearchBookListByzuozhe(String searchName);
+	public List<BookTable> DSearchBookListByzuozhe(String searchName,String guancangflag);
 
-	public List<BookTable> DSearchBookListByzhutici(String searchName);
+	public List<BookTable> DSearchBookListByzhutici(String searchName,String guancangflag);
 
 }
