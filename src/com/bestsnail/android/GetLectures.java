@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bestsnail.bean.LecturesTable;
 import com.bestsnail.bean.NewsTable;
 import com.bestsnail.bean.ResourceDynamicsTable;
+import com.bestsnail.daoiml.SearchLectures;
 import com.bestsnail.daoiml.SearchNews;
 import com.bestsnail.daoiml.SearchResourceDynamics;
 import com.bestsnail.utils.GetGson;
@@ -20,8 +22,8 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class GetNews
  */
-@WebServlet("/GetNews")
-public class GetNews extends HttpServlet {
+@WebServlet("/GetLectures")
+public class GetLectures extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -36,14 +38,13 @@ public class GetNews extends HttpServlet {
 		System.out.println("kankan neirong ");
 
 		String page = request.getParameter("page");
-//		String pagenum = request.getParameter("pagenum");
-System.out.println(page+"-------------");
+		// String pagenum = request.getParameter("pagenum");
+		System.out.println(page + "-------------");
 		int page_n = Integer.parseInt(page);
-//		int pagenum_n = Integer.parseInt(pagenum);
-		List<NewsTable> searchResourceByLimit = new SearchNews().SearchNewsByLimit(page_n,
-				30);
+		// int pagenum_n = Integer.parseInt(pagenum);
+		List<LecturesTable> searchResourceByLimit = 
+		new SearchLectures().SearchLecturesByLimit(page_n, 30);
 
-		
 		Gson mGetGson = GetGson.mGetGson();
 		String json = mGetGson.toJson(searchResourceByLimit);
 		System.out.println(json);

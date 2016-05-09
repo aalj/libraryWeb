@@ -117,5 +117,13 @@ public class LecturesTable {
 	private String lec_person;
 	private int lec_per_num;;
 	private Date create_time;
+	private int lec_longtime;
+	public int getLec_longtime() {
+		return lec_longtime;
+	}
+
+	public void setLec_longtime(int lec_longtime) {
+		this.lec_longtime = lec_longtime;
+	}
 
 }
