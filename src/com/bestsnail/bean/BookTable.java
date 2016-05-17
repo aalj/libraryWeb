@@ -189,5 +189,17 @@ public class BookTable {
 	public void setBook_num(int book_num) {
 		this.book_num = book_num;
 	}
+	@Override
+    public boolean equals(Object obj) {
+        if (obj instanceof BookTable) {
+            BookTable name = (BookTable) obj;
+            return (book_id == name.book_id);
+        }
+        return false;
+    }
 
+    public int hashCode() {
+        return book_id + "".hashCode();
+
+    }
 }

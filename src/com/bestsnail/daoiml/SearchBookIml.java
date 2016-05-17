@@ -85,26 +85,29 @@ public class SearchBookIml implements SearchBook {
 		return null;
 
 	}
-	//模糊随机查询用于模仿获得热门图书
+
+	// 模糊随机查询用于模仿获得热门图书
 	public List<BookTable> SearchBookList(int ii) {
 		PreparedStatement prepare = null;
 		ResultSet query = null;
 		Connection conn = DBconnection.getConnection();
 		/*
-		 * SELECT * FROM book_table AS r1 JOIN (SELECT ROUND(RAND() * (SELECT MAX(book_id) FROM book_table)) AS id) AS r2 WHERE r1.id >= r2.id ORDER BY r1.id ASC LIMIT 5;
+		 * SELECT * FROM book_table AS r1 JOIN (SELECT ROUND(RAND() * (SELECT
+		 * MAX(book_id) FROM book_table)) AS id) AS r2 WHERE r1.id >= r2.id
+		 * ORDER BY r1.id ASC LIMIT 5;
 		 */
 		String sql = "SELECT * FROM book_table ORDER BY rand() LIMIT 9  ";
 		try {
 			prepare = conn.prepareStatement(sql);
-			
+
 			query = prepare.executeQuery();
 			List<BookTable> list = new ArrayList<BookTable>();
 			BookTable bookTable = new BookTable();
 			while (query.next()) {
 				bookTable = new BookTable();
-				
+
 				bookTable.setBook_id(query.getInt("book_id"));
-				
+
 				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
 				bookTable.setBook_name(query.getString("book_name"));
 				bookTable.setBook_author(query.getString("book_author"));
@@ -118,21 +121,21 @@ public class SearchBookIml implements SearchBook {
 				bookTable.setBook_cd_down(query.getString("book_cd_down"));
 				bookTable.setBook_introduction(query.getString("book_introduction"));
 				bookTable.setBook_time(query.getDate("book_time"));
-				
+
 				bookTable.setBook_num(query.getInt("book_num"));
 				list.add(bookTable);
 			}
 			return list;
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-			
+
 		} finally {
 			CloseDb.close(conn, query, prepare);
 		}
-		
+
 		return null;
-		
+
 	}
 
 	@Override
@@ -214,6 +217,7 @@ public class SearchBookIml implements SearchBook {
 		return null;
 
 	}
+
 	public List<BookTable> DSearchBookListByAll(String searchName) {
 		PreparedStatement prepare = null;
 		ResultSet query = null;
@@ -223,14 +227,14 @@ public class SearchBookIml implements SearchBook {
 		try {
 			System.out.println("chauxn quanbu ");
 			prepare = conn.prepareStatement(sql);
-			
+
 			prepare.setString(1, "%" + searchName + "%");
 			query = prepare.executeQuery();
 			List<BookTable> list = new ArrayList<BookTable>();
 			BookTable bookTable = new BookTable();
 			while (query.next()) {
 				bookTable = new BookTable();
-				
+
 				bookTable.setBook_id(query.getInt("book_id"));
 				;
 				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
@@ -246,21 +250,21 @@ public class SearchBookIml implements SearchBook {
 				bookTable.setBook_cd_down(query.getString("book_cd_down"));
 				bookTable.setBook_introduction(query.getString("book_introduction"));
 				bookTable.setBook_time(query.getDate("book_time"));
-				
+
 				bookTable.setBook_num(query.getInt("book_num"));
 				list.add(bookTable);
 			}
 			return list;
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-			
+
 		} finally {
 			CloseDb.close(conn, query, prepare);
 		}
-		
+
 		return null;
-		
+
 	}
 
 	@Override
@@ -269,8 +273,7 @@ public class SearchBookIml implements SearchBook {
 		PreparedStatement prepare = null;
 		ResultSet query = null;
 		Connection conn = DBconnection.getConnection();
-		String sql = "select * from book_table where lc_id=? "
-				+ "and book_name LIKE ? ";
+		String sql = "select * from book_table where lc_id=? " + "and book_name LIKE ? ";
 		try {
 			prepare = conn.prepareStatement(sql);
 			prepare.setString(1, guancangflag);
@@ -415,7 +418,19 @@ public class SearchBookIml implements SearchBook {
 		return null;
 
 	}
-	 
+
+	/**
+	 * 
+	 * DSearchBookByISBN:(通过isbn号查询图书)<br/>
+	 *
+	 * @param @param
+	 *            isbn
+	 * @param @return
+	 *            设定文件
+	 * @return BookTable DOM对象
+	 * @throws @since
+	 *             CodingExample Ver 1.1
+	 */
 	public BookTable DSearchBookByISBN(String isbn) {
 
 		PreparedStatement prepare = null;
@@ -438,7 +453,7 @@ public class SearchBookIml implements SearchBook {
 				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
 				bookTable.setBook_name(query.getString("book_name"));
 				bookTable.setBook_author(query.getString("book_author"));
-				
+
 				bookTable.setBook_isbn(isbn);
 				bookTable.setBook_borrow_num(DQueryBorrowBokkNum(isbn));
 				bookTable.setBook_category_number(query.getString("book_category_number"));
@@ -452,7 +467,7 @@ public class SearchBookIml implements SearchBook {
 				bookTable.setBook_time(query.getDate("book_time"));
 
 				bookTable.setBook_num(query.getInt("book_num"));
-				
+
 			}
 			return bookTable;
 		} catch (SQLException e) {
@@ -466,8 +481,73 @@ public class SearchBookIml implements SearchBook {
 		return null;
 
 	}
-	
-	private int DQueryBorrowBokkNum(String isbn){
+
+	/**
+	 * 
+	 * DSearchBookByid:(通过Id查询图书)<br/>
+	 *
+	 * @param @param
+	 *            id
+	 * @param @return
+	 *            设定文件
+	 * @return BookTable DOM对象
+	 * @throws @since
+	 *             CodingExample Ver 1.1
+	 */
+	public BookTable DSearchBookByid(String book_id) {
+
+		PreparedStatement prepare = null;
+		ResultSet query = null;
+		Connection conn = DBconnection.getConnection();
+		String sql = "select * from book_table where book_id=?  ;";
+		try {
+			prepare = conn.prepareStatement(sql);
+			prepare.setString(1, book_id);
+			query = prepare.executeQuery();
+			BookTable bookTable = new BookTable();
+			if (query.next()) {
+				bookTable = new BookTable();
+				// book_id
+
+				//
+
+				bookTable.setBook_id(query.getInt("book_id"));
+				;
+				bookTable.setLlLibraryAddressTable(sLibAddressById(query.getInt("lc_id")));
+				bookTable.setBook_name(query.getString("book_name"));
+				bookTable.setBook_author(query.getString("book_author"));
+				String isbn = query.getString("book_isbn");
+				bookTable.setBook_isbn(isbn);
+				// 通过ISBN号查询已借图书
+				bookTable.setBook_borrow_num(DQueryBorrowBokkNum(isbn));
+
+				bookTable.setBook_category_number(query.getString("book_category_number"));
+				bookTable.setBook_publishing_house(query.getString("book_publishing_house"));
+				bookTable.setBook_publishing_house_time(query.getDate("book_publishing_house_time"));
+				bookTable.setBook_price(query.getFloat("book_price"));
+				bookTable.setBook_keywords(query.getString("book_keywords"));
+				bookTable.setBook_image(query.getString("book_image"));
+				bookTable.setBook_cd_down(query.getString("book_cd_down"));
+				bookTable.setBook_introduction(query.getString("book_introduction"));
+				bookTable.setBook_time(query.getDate("book_time"));
+
+				bookTable.setBook_num(query.getInt("book_num"));
+
+			}
+			return bookTable;
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+			CloseDb.close(conn, query, prepare);
+		}
+
+		return null;
+
+	}
+
+	private int DQueryBorrowBokkNum(String isbn) {
 		PreparedStatement prepare = null;
 		ResultSet query = null;
 		Connection conn = DBconnection.getConnection();
@@ -475,12 +555,12 @@ public class SearchBookIml implements SearchBook {
 		try {
 			prepare = conn.prepareStatement(sql);
 			prepare.setString(1, isbn);
-			
+
 			query = prepare.executeQuery();
 			if (query.next()) {
 				return query.getInt("count(*)");
 			}
-			
+
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -490,11 +570,7 @@ public class SearchBookIml implements SearchBook {
 		}
 
 		return 0;
-		
-		
-		
-		
-		
+
 	}
 
 }

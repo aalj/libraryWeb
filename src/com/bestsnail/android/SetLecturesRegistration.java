@@ -2,7 +2,6 @@ package com.bestsnail.android;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,16 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bestsnail.bean.LecturesTable;
 import com.bestsnail.daoiml.SearchLectures;
-import com.bestsnail.utils.GetGson;
-import com.google.gson.Gson;
 
 /**
- * Servlet implementation class getLecRegistrationNum
+ * 进行报名的
  */
-@WebServlet("/getLecRegistrationNum")
-public class getLecRegistrationNum extends HttpServlet {
+@WebServlet("/SetLecturesRegistration")
+public class SetLecturesRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -33,15 +29,30 @@ public class getLecRegistrationNum extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		System.out.println("kankan neirong ");
 
-		String page = request.getParameter("id");
-		// String pagenum = request.getParameter("pagenum");
-		System.out.println(page + "-------------");
-		int page_n = Integer.parseInt(page);
-		// int pagenum_n = Integer.parseInt(pagenum);
-		int i = new SearchLectures().getLecturesRegistration(page_n);
-		System.out.println("baimgnshu "+i);
+		String lec_id = request.getParameter("lec_id");
+		String stu_id = request.getParameter("stu_id");
+		System.out.println(lec_id + "-------------" + stu_id);
+		int lec_id_n = Integer.parseInt(lec_id);
+		int stu_id_n = Integer.parseInt(stu_id);
+		SearchLectures searchLectures = new SearchLectures();
 		PrintWriter writer = response.getWriter();
-		writer.print(i);
+
+		boolean lecturesRegistration = searchLectures.isLecturesRegistration(lec_id_n, stu_id_n);
+
+		if (lecturesRegistration) {
+			int i = searchLectures.setLecturesRegistration(lec_id_n, stu_id_n);
+
+			if (i > 0) {
+				writer.print("报名成功");
+
+			} else {
+				writer.print("报名失败");
+
+			}
+		} else {
+			writer.print("改讲座你已经报名了");
+		}
+
 		writer.close();
 	}
 

@@ -19,6 +19,7 @@ import org.junit.Test;
 
 import com.bestsnail.bean.BookTable;
 import com.bestsnail.daoiml.SearchBookIml;
+import com.bestsnail.daoiml.SearchLectures;
 
 /**
  * ClassName:TE Function: TODO ADD FUNCTION Reason: TODO ADD REASON
@@ -34,7 +35,7 @@ import com.bestsnail.daoiml.SearchBookIml;
 public class TE {
 	@Test
 	public void Testma() {
-//		System.out.println(new SearchBookIml().DQueryBorrowBokkNum("6920114800164"));
+	System.out.println(	new SearchLectures().getLecturesRegistration(1 ));
 	}
 
 }
