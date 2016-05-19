@@ -13,13 +13,9 @@
 
 package com.bestsnail.test;
 
-import java.util.List;
-
 import org.junit.Test;
 
-import com.bestsnail.bean.BookTable;
-import com.bestsnail.daoiml.SearchBookIml;
-import com.bestsnail.daoiml.SearchLectures;
+import com.bestsnail.daoiml.BorrowingDaoIml;
 
 /**
  * ClassName:TE Function: TODO ADD FUNCTION Reason: TODO ADD REASON
@@ -35,7 +31,7 @@ import com.bestsnail.daoiml.SearchLectures;
 public class TE {
 	@Test
 	public void Testma() {
-	System.out.println(	new SearchLectures().getLecturesRegistration(1 ));
+	System.out.println(	new BorrowingDaoIml().BorrowingHByStuId(1,1).toString());
 	}
 
 }

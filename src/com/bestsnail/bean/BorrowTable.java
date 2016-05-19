@@ -28,24 +28,41 @@ import java.util.Date;
  */
 public class BorrowTable {
 	private int borrow_id;
-	private int borrow_num;
+	
 	private Student student;
 	private BookTable book;
 	private Date borrow_time;
+	@Override
+	public String toString() {
+		return "BorrowTable [borrow_id=" + borrow_id + ", student=" + student + ", book=" + book + ", borrow_time="
+				+ borrow_time + ", remand_time=" + remand_time + ", borrow_is=" + borrow_is + "]";
+	}
+
+	private Date remand_time;
 	/**
 	 * 是否还书
 	 */
 	private int borrow_is;
 
-	public BorrowTable(int borrow_id, int borrow_num, Student student, BookTable book, Date borrow_time,
+	
+
+	public BorrowTable(int borrow_id, Student student, BookTable book, Date borrow_time, Date remand_time,
 			int borrow_is) {
 		super();
 		this.borrow_id = borrow_id;
-		this.borrow_num = borrow_num;
 		this.student = student;
 		this.book = book;
 		this.borrow_time = borrow_time;
+		this.remand_time = remand_time;
 		this.borrow_is = borrow_is;
+	}
+
+	public Date getRemand_time() {
+		return remand_time;
+	}
+
+	public void setRemand_time(Date remand_time) {
+		this.remand_time = remand_time;
 	}
 
 	public BorrowTable() {
@@ -60,13 +77,6 @@ public class BorrowTable {
 		this.borrow_id = borrow_id;
 	}
 
-	public int getBorrow_num() {
-		return borrow_num;
-	}
-
-	public void setBorrow_num(int borrow_num) {
-		this.borrow_num = borrow_num;
-	}
 
 	public Student getStudent() {
 		return student;

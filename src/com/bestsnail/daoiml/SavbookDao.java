@@ -8,14 +8,14 @@ import java.util.Date;
 import com.bestsnail.utils.DBconnection;
 
 public class SavbookDao {
-	public boolean addCoupon(String name,String isbn,String suo,String zuozhe,String chubanshe){
+	public boolean addCoupon(String name,String isbn,String suo,String zuozhe,String chubanshe,String dizhi){
 		// 1、连数据库
 				PreparedStatement prep = null;
 				Connection conn = null;
 				try {
 					conn = DBconnection.getConnection();
 					// 2、SQL语句
-					String sql = "insert into book_table (book_name,book_isbn,book_category_number,book_time,book_author,book_publishing_house)" + "values (?,?,?,?,?,?)";
+					String sql = "insert into book_table (book_name,book_isbn,book_category_number,book_time,book_author,book_publishing_house,lc_id)" + "values (?,?,?,?,?,?,?)";
 					// 3、获得preparedStatement对象
 					prep = conn.prepareStatement(sql);
 					// 4、设置？的值
@@ -28,6 +28,7 @@ public class SavbookDao {
 					prep.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
 					prep.setString(5, zuozhe);
 					prep.setString(6, chubanshe);
+					prep.setString(7, dizhi);
 					// 5、执行sql语句
 					int executeUpdate = prep.executeUpdate();
 					if(executeUpdate>0){

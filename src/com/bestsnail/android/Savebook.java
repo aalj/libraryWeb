@@ -33,9 +33,10 @@ public class Savebook extends HttpServlet {
 		String names = URLDecoder.decode(request.getParameter("names"), "utf-8");
 		String zuozhes = URLDecoder.decode(request.getParameter("zuozhes"), "utf-8");
 		String chubanshe_ets = URLDecoder.decode(request.getParameter("chubanshe_ets"), "utf-8");
+		String dizhi = URLDecoder.decode(request.getParameter("dizhi"), "utf-8");
 		SavbookDao savebook = new SavbookDao();
 		// String name,int isbn,String suo,String zuozhe,String chubanshe
-		boolean addCoupon = savebook.addCoupon(names, isbn_infos, suoshuhao_infos, zuozhes, chubanshe_ets);
+		boolean addCoupon = savebook.addCoupon(names, isbn_infos, suoshuhao_infos, zuozhes, chubanshe_ets,dizhi);
 
 		PrintWriter writer = response.getWriter();
 		if (addCoupon) {
