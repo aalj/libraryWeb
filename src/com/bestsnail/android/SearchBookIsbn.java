@@ -32,18 +32,35 @@ public class SearchBookIsbn extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		System.out.println("lllllll");
 		String isbn = URLDecoder.decode(request.getParameter("isbn"), "utf-8");
+		String temp =  request.getParameter("temp") ;
+		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		PrintWriter writer = response.getWriter();
+		SearchBookIml searchBookIml = new SearchBookIml();
+		System.out.println(isbn);
+		if("12".equals(temp)){
+			BookTable book = searchBookIml.DSearchBookByISBNe(isbn);
+			 if(book!=null){
+				 String json = gson.toJson(book);
+				 writer.print(json);
+				 System.out.println(json);
+			 }else{
+				 
+				 writer.print("no");
+			 }
+		}else{
+			BookTable book = searchBookIml.DSearchBookByISBN(isbn);
+			 if(book!=null){
+				 String json = gson.toJson(book);
+				 writer.print(json);
+				 System.out.println(json);
+			 }else{
+				 
+				 writer.print("no");
+			 }
+		}
 		
-		 BookTable book = new SearchBookIml().DSearchBookByISBN(isbn);
-		 if(book!=null){
-			 String json = gson.toJson(book);
-			 writer.print(json);
-			 
-		 }else{
-			 
-			 writer.print("no");
-		 }
+		 
 	}
 
 	/**

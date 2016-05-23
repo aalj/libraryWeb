@@ -17,6 +17,7 @@ import org.junit.Test;
 
 import com.bestsnail.daoiml.BookRecommendDaoIml;
 import com.bestsnail.daoiml.BorrowingDaoIml;
+import com.bestsnail.daoiml.SearchBookIml;
 import com.bestsnail.daoiml.SearchLectures;
 
 /**
@@ -32,8 +33,8 @@ import com.bestsnail.daoiml.SearchLectures;
  */
 public class TE {
 	@Test
-	public void Testma() {
-	System.out.println(	new BookRecommendDaoIml().saveBookRecommend(1+"", "aa", "aa", "123465798", "456465") );
+	public void Testma() {//6922507096369
+	System.out.println(	new SearchBookIml().DSearchBookByISBNe("6922507096369") );
 	}
 
 }

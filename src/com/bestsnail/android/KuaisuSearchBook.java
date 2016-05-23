@@ -15,6 +15,7 @@ import com.bestsnail.bean.BookTable;
 import com.bestsnail.daoiml.SearchBookIml;
 import com.bestsnail.minterface.service.SearchBookS;
 import com.bestsnail.serviceiml.SearchBookSiml;
+import com.bestsnail.utils.GetGson;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,20 +37,30 @@ public class KuaisuSearchBook extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		System.out.println("kankan neirong ");
 		String guanjianzi = request.getParameter("guanjianzi");
-System.out.println(guanjianzi+"-----------------------");
+		String temp = request.getParameter("temp");
+		System.out.println(guanjianzi + "-----------------------");
 		if (guanjianzi != null) {
 			guanjianzi = URLDecoder.decode(guanjianzi, "utf-8");
 
 		}
 		List<BookTable> list = null;
-
-		list = new SearchBookIml().DSearchBookListByAll(guanjianzi);
-
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-		String json = gson.toJson(list);
-		System.out.println(json);
 		PrintWriter writer = response.getWriter();
+		String json = null;
+		SearchBookIml searchBookIml = new SearchBookIml();
+		Gson gson = GetGson.mGetGson();
+		if ("12".equals(temp)) {
+			list = searchBookIml.DSearchBookListByAlle(guanjianzi);
+
+			json = gson.toJson(list);
+
+		} else {
+			list = searchBookIml.DSearchBookListByAll(guanjianzi);
+
+			json = gson.toJson(list);
+
+		}
 		writer.print(json);
+
 		writer.close();
 
 	}
