@@ -40,6 +40,12 @@ public class LecturesRegistrationTable {
 		this.create_time = create_time;
 	}
 
+	@Override
+	public String toString() {
+		return "LecturesRegistrationTable [lere_id=" + lere_id + ", lecturesTable=" + lecturesTable + ", student="
+				+ student + ", create_time=" + create_time + "]";
+	}
+
 	public int getLere_id() {
 		return lere_id;
 	}

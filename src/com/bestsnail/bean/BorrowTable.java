@@ -28,7 +28,27 @@ import java.util.Date;
  */
 public class BorrowTable {
 	private int borrow_id;
-	
+	 private int borrow_num;
+	public int getBorrow_num() {
+		return borrow_num;
+	}
+
+	public void setBorrow_num(int borrow_num) {
+		this.borrow_num = borrow_num;
+	}
+
+	public BorrowTable(int borrow_id, int borrow_num, Student student, BookTable book, Date borrow_time,
+			Date remand_time, int borrow_is) {
+		super();
+		this.borrow_id = borrow_id;
+		this.borrow_num = borrow_num;
+		this.student = student;
+		this.book = book;
+		this.borrow_time = borrow_time;
+		this.remand_time = remand_time;
+		this.borrow_is = borrow_is;
+	}
+
 	private Student student;
 	private BookTable book;
 	private Date borrow_time;

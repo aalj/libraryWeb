@@ -15,7 +15,9 @@ package com.bestsnail.test;
 
 import org.junit.Test;
 
+import com.bestsnail.daoiml.BookRecommendDaoIml;
 import com.bestsnail.daoiml.BorrowingDaoIml;
+import com.bestsnail.daoiml.SearchLectures;
 
 /**
  * ClassName:TE Function: TODO ADD FUNCTION Reason: TODO ADD REASON
@@ -31,7 +33,7 @@ import com.bestsnail.daoiml.BorrowingDaoIml;
 public class TE {
 	@Test
 	public void Testma() {
-	System.out.println(	new BorrowingDaoIml().BorrowingHByStuId(1,1).toString());
+	System.out.println(	new BookRecommendDaoIml().saveBookRecommend(1+"", "aa", "aa", "123465798", "456465") );
 	}
 
 }

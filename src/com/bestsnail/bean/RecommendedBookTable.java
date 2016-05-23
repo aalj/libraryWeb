@@ -33,16 +33,12 @@ public class RecommendedBookTable {
 		super();
 	}
 
-	public RecommendedBookTable(int rebo_id, Student student, String rebo_book_name, String rebo_anthor, int rebo_isbn,
-			String rebo_press, Date create_time) {
-		super();
-		this.rebo_id = rebo_id;
-		this.student = student;
-		this.rebo_book_name = rebo_book_name;
-		this.rebo_anthor = rebo_anthor;
+	public String getRebo_isbn() {
+		return rebo_isbn;
+	}
+
+	public void setRebo_isbn(String rebo_isbn) {
 		this.rebo_isbn = rebo_isbn;
-		this.rebo_press = rebo_press;
-		this.create_time = create_time;
 	}
 
 	public int getRebo_id() {
@@ -77,13 +73,6 @@ public class RecommendedBookTable {
 		this.rebo_anthor = rebo_anthor;
 	}
 
-	public int getRebo_isbn() {
-		return rebo_isbn;
-	}
-
-	public void setRebo_isbn(int rebo_isbn) {
-		this.rebo_isbn = rebo_isbn;
-	}
 
 	public String getRebo_press() {
 		return rebo_press;
@@ -105,7 +94,7 @@ public class RecommendedBookTable {
 	private Student student;
 	private String rebo_book_name;
 	private String rebo_anthor;
-	private int rebo_isbn;
+	private String rebo_isbn;
 	private String rebo_press;
 	private Date create_time;
 

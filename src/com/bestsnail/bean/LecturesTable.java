@@ -28,6 +28,13 @@ import java.util.Date;
  * 
  */
 public class LecturesTable {
+	@Override
+	public String toString() {
+		return "LecturesTable [lec_id=" + lec_id + ", lec_title=" + lec_title + ", lec_info=" + lec_info + ", lec_time="
+				+ lec_time + ", lec_address=" + lec_address + ", lec_person=" + lec_person + ", lec_per_num="
+				+ lec_per_num + ", create_time=" + create_time + ", lec_longtime=" + lec_longtime + "]";
+	}
+
 	public LecturesTable(int lec_id, String lec_title, String lec_info, Date lec_time, String lec_address,
 			String lec_person, int lec_per_num, Date create_time) {
 		super();
