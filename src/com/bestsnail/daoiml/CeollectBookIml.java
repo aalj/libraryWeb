@@ -173,5 +173,54 @@ public class CeollectBookIml {
 		return null;
 
 	}
+	/**
+	 * 
+	 * getCollectBookByStuid:(通过学生id查询学生收藏的全部图书)<br/>
+	 *
+	 * @param  @param stu_id
+	 * @param  @return    设定文件
+	 * @return List<CollectBook>    DOM对象
+	 * @throws 
+	 * @since  CodingExample　Ver 1.1
+	 */
+		public List<CollectBook> getCollectBookByStuid(int stu_id,int page) {
+
+			PreparedStatement prepare = null;
+			ResultSet query = null;
+			Connection conn = DBconnection.getConnection();
+			String sql = "select * from collect_book  where stu_id = ?  order by create_time desc limit ?,? ; ";
+			try {
+				prepare = conn.prepareStatement(sql);
+				prepare.setInt(1, stu_id);
+				prepare.setInt(2, (page-1)*30);
+				prepare.setInt(3, 30);
+				query = prepare.executeQuery();
+				List<CollectBook> list = new ArrayList<CollectBook>();
+				CollectBook collectBook = null;
+				SearchBookIml searchBookIml = new SearchBookIml();
+				while (query.next()) {
+
+					collectBook = new CollectBook();
+					
+					collectBook.setCollect_id(query.getInt("collect_id"));
+					String  book_id =  query.getString("book_id");
+					collectBook.setBook(searchBookIml.DSearchBookByid(book_id));
+					collectBook.setStudent(null);
+					collectBook.setCreate_time(query.getDate("create_time"));
+
+					list.add(collectBook);
+				}
+				return list;
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+
+			} finally {
+				CloseDb.close(conn, query, prepare);
+			}
+
+			return null;
+
+		}
 
 }

@@ -40,7 +40,6 @@ public class GetLecRegistrationListservlet extends HttpServlet {
 
 		int nStu_id = 0;
 		int npage = 0;
-		System.out.println(stu_id + "------------------------");
 		if (stu_id != null) {
 			nStu_id = Integer.parseInt(stu_id);
 			npage = Integer.parseInt(page);
@@ -55,7 +54,6 @@ public class GetLecRegistrationListservlet extends HttpServlet {
 
 		if (lecturesRegistrationb.size() > 0) {
 			String json = mGetGson.toJson(lecturesRegistrationb);
-			System.out.println("----" + json);
 			writer.print(json);
 
 		} else {

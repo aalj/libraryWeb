@@ -50,7 +50,6 @@ public class BorrowingHistoryServlet extends HttpServlet {
 		
 		if(borrowingHByStuId.size()>0){
 			String json = mGetGson.toJson(borrowingHByStuId);
-			System.out.println("----"+json);
 			writer.print(json);
 			
 		}else{

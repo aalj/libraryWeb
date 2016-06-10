@@ -31,15 +31,12 @@ public class getLecRegistrationNum extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("kankan neirong ");
 
 		String page = request.getParameter("id");
 		// String pagenum = request.getParameter("pagenum");
-		System.out.println(page + "-------------");
 		int page_n = Integer.parseInt(page);
 		// int pagenum_n = Integer.parseInt(pagenum);
 		int i = new SearchLectures().getLecturesRegistration(page_n);
-		System.out.println("baimgnshu "+i);
 		PrintWriter writer = response.getWriter();
 		writer.print(i);
 		writer.close();

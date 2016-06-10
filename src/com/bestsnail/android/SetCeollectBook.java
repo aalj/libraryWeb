@@ -26,7 +26,6 @@ public class SetCeollectBook extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("kankan neirong ");
 
 		String book_id = request.getParameter("book_id");
 		String stu_id = request.getParameter("stu_id");

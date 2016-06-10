@@ -40,7 +40,6 @@ public class BorrowingBookServlet extends HttpServlet {
 			nStu_id = Integer.parseInt(stu_id);
 			npage=Integer.parseInt(page);
 		}
-		System.out.println(nStu_id+"--------"+npage);
 		
 		
 		BorrowingDaoIml  borrowingHistoryDaoIml = new  BorrowingDaoIml();
@@ -50,7 +49,6 @@ public class BorrowingBookServlet extends HttpServlet {
 		
 		if(borrowingHByStuId.size()>0){
 			String json = mGetGson.toJson(borrowingHByStuId);
-			System.out.println("----"+json);
 			writer.print(json);
 			
 		}else{

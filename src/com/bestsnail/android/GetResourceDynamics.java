@@ -31,11 +31,9 @@ public class GetResourceDynamics extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("kankan neirong ");
 		
 		
 		String page = request.getParameter("page");
-		System.out.println("page------"+page );
 		
 		
 //		String pagenum = request.getParameter("pagenum");

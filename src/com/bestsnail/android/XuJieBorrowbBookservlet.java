@@ -31,6 +31,11 @@ public class XuJieBorrowbBookservlet extends HttpServlet {
 		String stu_id = request.getParameter("stu_id");
 		String xunum = request.getParameter("xunum");
 		String borroe_id = request.getParameter("borroe_id");
+		
+		System.out.println("图书续借服务端接收数据");
+		System.out.println("学生id： "+stu_id+"\t"+"续借的次数： "+xunum+"\t"+"续借图书ID: "+borroe_id);
+		
+		
 		int stu_id_n = 0;
 		int xunum_n = 0;
 		int borroe_id_n = 0;
@@ -40,8 +45,10 @@ public class XuJieBorrowbBookservlet extends HttpServlet {
 			borroe_id_n = Integer.parseInt(borroe_id);
 
 		}
-		System.out.println(stu_id + "\t" + xunum + "\t" + borroe_id + "\t");
+		
+		
 		int xujienum = new BorrowingDaoIml().BorrowingXuJieByStuId(borroe_id_n, xunum_n, stu_id_n);
+		
 		PrintWriter writer = response.getWriter();
 
 		writer.print(xujienum);

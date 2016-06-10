@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bestsnail.bean.BookTable;
 import com.bestsnail.daoiml.SearchBookIml;
+import com.bestsnail.utils.GetGson;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 /**
@@ -32,7 +33,7 @@ public class SendReMenSousuo extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		List<BookTable> searchBookList = new SearchBookIml().SearchBookList(98);
 		PrintWriter writer = response.getWriter();
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Gson gson = GetGson.mGetGson();
 		String json = gson.toJson(searchBookList);
 		writer.print(json);
 		writer.close();

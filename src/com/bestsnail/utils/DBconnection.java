@@ -38,7 +38,11 @@ public class DBconnection {
 			Properties p = new Properties();
 			p.load(DBconnection.class.getResourceAsStream("db.properties"));
 			Class.forName(p.getProperty("driver"));
-			return DriverManager.getConnection(p.getProperty("url"), p.getProperty("name"), p.getProperty("pwd"));
+			//返回连接数据的对象
+			return DriverManager.getConnection(
+					p.getProperty("url"), //数据库地址
+					p.getProperty("name"), //数据库用户名
+					p.getProperty("pwd"));//数据库登陆密码
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			return null;

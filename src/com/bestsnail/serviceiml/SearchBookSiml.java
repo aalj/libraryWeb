@@ -45,30 +45,49 @@ public class SearchBookSiml implements SearchBookS {
 	}
 
 	@Override
-	public List<BookTable> SearchBookSimlByAll(String searchName,String guancangflag) {
+	public List<BookTable> SearchBookSimlByAll(String searchName, String guancangflag) {
 
-		return sea.DSearchBookListByAll(searchName,guancangflag);
-
-	}
-
-	@Override
-	public List<BookTable> SearchBookSimlByTiming(String searchName,String guancangflag) {
-
-		return sea.DSearchBookListByTiming(searchName,guancangflag);
+		return sea.DSearchBookListByAll(searchName, guancangflag);
 
 	}
 
 	@Override
-	public List<BookTable> SearchBookSimlByzuozhe(String searchName,String guancangflag) {
+	public List<BookTable> SearchBookSimlByTiming(String searchName, String guancangflag) {
 
-		return sea.DSearchBookListByzuozhe(searchName,guancangflag);
+		return sea.DSearchBookListByTiming(searchName, guancangflag);
 
 	}
 
 	@Override
-	public List<BookTable> SearchBookSimlByzhutuci(String searchName,String guancangflag) {
+	public List<BookTable> SearchBookSimlByzuozhe(String searchName, String guancangflag) {
 
-		return sea.DSearchBookListByzhutici(searchName,guancangflag);
+		return sea.DSearchBookListByzuozhe(searchName, guancangflag);
+
+	}
+
+	@Override
+	public List<BookTable> SearchBookSimlByzhutuci(String searchName, String guancangflag) {
+
+		return sea.DSearchBookListByzhutici(searchName, guancangflag);
+
+	}
+
+	@Override
+	public List<BookTable> SearchBookSimlByebook(String searchName) {
+
+		List<BookTable> list2 = sea.SearcheBookList(searchName);
+		
+
+		return list2;
+
+	}
+
+	@Override
+	public List<BookTable> SearchBookSimlkuaisu(String searchName) {
+
+		List<BookTable> list2 = sea.kuaisuSearchBook(searchName);
+
+		return list2;
 
 	}
 

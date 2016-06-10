@@ -56,5 +56,17 @@ public interface SearchBook {
 	public List<BookTable> DSearchBookListByzuozhe(String searchName,String guancangflag);
 
 	public List<BookTable> DSearchBookListByzhutici(String searchName,String guancangflag);
-
+	
+//	public List<BookTable> DSearchBookListByName(String searchName);
+//	public List<BookTable> DSearchBookListByAuthor(String searchName);
+//	public List<BookTable> DSearchBookListByzhutici(String searchName);
+//	public List<BookTable> DSearchBookListByIsbn(String searchName);
+	public List<BookTable> kuaisuSearchBook(String searchName);
+	
+	
+	public List<BookTable> SearcheBookList(String searchName) ;
+//	public List<BookTable> DSearchBookListByNamee(String searchName) ;
+//	public List<BookTable> DSearchBookListByAuthere(String searchName) ;
+//	public List<BookTable> DSearchBookListByguanjianzie(String searchName) ;
+//	public List<BookTable> DSearchBookListByIsbne(String searchName) ;
 }

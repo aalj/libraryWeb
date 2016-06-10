@@ -34,7 +34,7 @@ public class SearchRemenBook extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("lllllll");
+		
 		
 		List<BookTable> searchBookSiml = bookSiml.SearchBookSiml();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();

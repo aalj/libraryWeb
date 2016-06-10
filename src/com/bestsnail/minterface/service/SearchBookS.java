@@ -50,6 +50,8 @@ public interface SearchBookS {
 	public List<BookTable> SearchBookSimlByTiming(String searchName,String guancangflag);
 	public List<BookTable> SearchBookSimlByzuozhe(String searchName,String guancangflag);
 	public List<BookTable> SearchBookSimlByzhutuci(String searchName,String guancangflag);
+	public List<BookTable> SearchBookSimlByebook(String searchName );
+	public List<BookTable> SearchBookSimlkuaisu(String searchName );
 	
 }
 

@@ -9,6 +9,6 @@ import com.google.gson.GsonBuilder;
 public class GetGson {
 
     public  static Gson  mGetGson(){
-        return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        return new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").setPrettyPrinting().create();
     }
 }

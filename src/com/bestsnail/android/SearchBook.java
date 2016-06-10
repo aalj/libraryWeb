@@ -35,7 +35,6 @@ public class SearchBook extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("kankan neirong ");
 		String guanjianzi = request.getParameter("guanjianzi");
 		String guancangflag = request.getParameter("guancangflag");
 		String flag = request.getParameter("flag");
@@ -61,7 +60,6 @@ public class SearchBook extends HttpServlet {
 		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		String json = gson.toJson(list);
-		System.out.println(json);
 		PrintWriter writer = response.getWriter();
 		writer.print(json);
 		writer.close();

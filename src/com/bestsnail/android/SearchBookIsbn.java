@@ -30,20 +30,17 @@ public class SearchBookIsbn extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("lllllll");
 		String isbn = URLDecoder.decode(request.getParameter("isbn"), "utf-8");
 		String temp =  request.getParameter("temp") ;
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		PrintWriter writer = response.getWriter();
 		SearchBookIml searchBookIml = new SearchBookIml();
-		System.out.println(isbn);
 		if("12".equals(temp)){
 			BookTable book = searchBookIml.DSearchBookByISBNe(isbn);
 			 if(book!=null){
 				 String json = gson.toJson(book);
 				 writer.print(json);
-				 System.out.println(json);
 			 }else{
 				 
 				 writer.print("no");
@@ -53,7 +50,6 @@ public class SearchBookIsbn extends HttpServlet {
 			 if(book!=null){
 				 String json = gson.toJson(book);
 				 writer.print(json);
-				 System.out.println(json);
 			 }else{
 				 
 				 writer.print("no");

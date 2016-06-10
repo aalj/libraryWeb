@@ -27,7 +27,6 @@ public class SetLecturesRegistration extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("kankan neirong ");
 
 		String lec_id = request.getParameter("lec_id");
 		String stu_id = request.getParameter("stu_id");

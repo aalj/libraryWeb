@@ -19,6 +19,7 @@ import com.bestsnail.daoiml.BookRecommendDaoIml;
 import com.bestsnail.daoiml.BorrowingDaoIml;
 import com.bestsnail.daoiml.SearchBookIml;
 import com.bestsnail.daoiml.SearchLectures;
+import com.bestsnail.utils.MD5Utils;
 
 /**
  * ClassName:TE Function: TODO ADD FUNCTION Reason: TODO ADD REASON
@@ -34,7 +35,7 @@ import com.bestsnail.daoiml.SearchLectures;
 public class TE {
 	@Test
 	public void Testma() {//6922507096369
-	System.out.println(	new SearchBookIml().DSearchBookByISBNe("6922507096369") );
+	System.out.println(	new MD5Utils().digestMD5("54264586") );
 	}
 
 }

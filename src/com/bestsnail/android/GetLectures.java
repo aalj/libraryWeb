@@ -35,11 +35,9 @@ public class GetLectures extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("kankan neirong ");
 
 		String page = request.getParameter("page");
 		// String pagenum = request.getParameter("pagenum");
-		System.out.println(page + "-------------");
 		int page_n = Integer.parseInt(page);
 		// int pagenum_n = Integer.parseInt(pagenum);
 		List<LecturesTable> searchResourceByLimit = 
@@ -47,7 +45,6 @@ public class GetLectures extends HttpServlet {
 
 		Gson mGetGson = GetGson.mGetGson();
 		String json = mGetGson.toJson(searchResourceByLimit);
-		System.out.println(json);
 		PrintWriter writer = response.getWriter();
 		writer.print(json);
 		writer.close();

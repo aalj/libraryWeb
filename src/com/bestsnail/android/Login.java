@@ -29,15 +29,15 @@ public class Login extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
+		//接收请求数据
+		//学号
 		String xuehao = URLDecoder.decode(request.getParameter("xuehao"), "utf-8");
+		//密码
 		String pwd = URLDecoder.decode(request.getParameter("pwd"), "utf-8");
-		
+		//调用JDBC访问数据库对比数据判断登陆是否成功
 		Student mLogin = new LoginDao().MLogin(xuehao,pwd);
 		Gson mGetGson = GetGson.mGetGson();
 		String json = mGetGson.toJson(mLogin);
-		System.out.println(xuehao);
-		System.out.println(pwd);
-		System.out.println(json);
 		PrintWriter writer = response.getWriter();
 		writer.print(json);
 		writer.close();

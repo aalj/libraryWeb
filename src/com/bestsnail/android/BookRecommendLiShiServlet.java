@@ -40,7 +40,6 @@ public class BookRecommendLiShiServlet extends HttpServlet {
 		if (bookRecommendLishi.size() > 0) {
 			String json = mGetGson.toJson(bookRecommendLishi);
 			writer.print(json);
-			System.out.println(json);
 		} else {
 			writer.print("no");
 		}
